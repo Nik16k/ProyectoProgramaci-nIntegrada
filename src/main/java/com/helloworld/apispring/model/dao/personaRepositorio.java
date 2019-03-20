@@ -41,7 +41,7 @@ public class personaRepositorio {
 
     }
 
-    public List<personas> personaPorID(String usuario, String contraseña) {
+    public List<personas> login(String usuario, String contraseña) {
         Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(personas.class);
         criteria.add(Restrictions.eq("USUARIO", usuario));
         criteria.add(Restrictions.eq("CONTRASENNA", contraseña));

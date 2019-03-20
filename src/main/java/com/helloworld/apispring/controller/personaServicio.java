@@ -28,5 +28,9 @@ public class personaServicio {
      List<personas> getCiudadanoPorId(int IdCiudadano) {
         return (List<personas>) Ciudadano_Repositorio.personaPorID(IdCiudadano);
     }
+     
+         List<personas> getLogin(String usuario, String contrAseña) {
+        return (List<personas>) Ciudadano_Repositorio.login(usuario, contrAseña);
+    }
    
 }
