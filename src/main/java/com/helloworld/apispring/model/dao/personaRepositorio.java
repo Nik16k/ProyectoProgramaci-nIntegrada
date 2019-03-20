@@ -34,9 +34,9 @@ public class personaRepositorio {
         return Persona.getIdCiudadano();
     }
 
-    public List<personas> ciudadnosPorId(String apellido) {
+    public List<personas> ciudadnosPorId(int IdCiudadano) {
         Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(personas.class);
-        criteria.add(Restrictions.eq("ApellidosCiudadano", apellido));
+        criteria.add(Restrictions.eq("IdCiudadano", IdCiudadano));
         return criteria.list();
     
     }

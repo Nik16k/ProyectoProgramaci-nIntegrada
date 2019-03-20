@@ -25,8 +25,8 @@ public class personaServicio {
     }
 
    
-     List<personas> getCiudadanoPorId(String apellido) {
-        return (List<personas>) Ciudadano_Repositorio.ciudadnosPorId(apellido);
+     List<personas> getCiudadanoPorId(int IdCiudadano) {
+        return (List<personas>) Ciudadano_Repositorio.ciudadnosPorId(IdCiudadano);
     }
    
 }

@@ -45,8 +45,8 @@ public class Controller {
 
 
     @RequestMapping(value = "/personasBuscar", method = RequestMethod.GET)
-    public ResponseEntity<List<personas>> PersonaID(@RequestParam(value = "ApellidosCiudadano") String apellido) {
-        List<personas> ciudadnosId = (List<personas>) Ciudadano_Servicio.getCiudadanoPorId(apellido);
+    public ResponseEntity<List<personas>> PersonaID(@RequestParam(value = "IdCiudadano") int IdCiudadano) {
+        List<personas> ciudadnosId = (List<personas>) Ciudadano_Servicio.getCiudadanoPorId(IdCiudadano);
         return new ResponseEntity<List<personas>>(ciudadnosId, HttpStatus.OK);
     }
 
