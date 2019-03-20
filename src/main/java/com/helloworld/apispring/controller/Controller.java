@@ -15,55 +15,57 @@ import org.springframework.http.MediaType;
 public class Controller {
 
     @Autowired
-    private personaServicio Ciudadano_Servicio;
+    private personaServicio personaServicio;
     @Autowired
-    private historiaServicio registroSituacionesServicio;
+    private historiaServicio historiaServicio;
 
-// Servicio No.1 Mostrar todos los personas creados en la database
-    @RequestMapping(value = "/PersonasConsul", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/PersonasConsultar", method = RequestMethod.GET)
     public ResponseEntity<List<personas>> obtenerCiudadanos() {
-        List<personas> ciudadanos = Ciudadano_Servicio.getCiudadanos();
+        List<personas> ciudadanos = personaServicio.getCiudadanos();
         return new ResponseEntity<List<personas>>(ciudadanos, HttpStatus.OK);
     }
-//Servicio No. 2 Crear un ciudadano en la database
 
-    @RequestMapping(value = "/PersonasInsert", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/PersonasInsertar", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> crearPersona(@RequestBody personas Ciudadano) {
-        String resultado = "Se creo persona con ID: " + Ciudadano_Servicio.crearPersona(Ciudadano);
+        String resultado = "Se creo persona con ID: " + personaServicio.crearPersona(Ciudadano);
         return new ResponseEntity<String>(resultado, HttpStatus.OK);
     }
 
     @Autowired
-    private eventoServicio Situaciones_Servicio;
+    private eventoServicio eventoServicio;
 
 
-    @RequestMapping(value = "/eventosConsul", method = RequestMethod.GET)
+    @RequestMapping(value = "/eventosConsultar", method = RequestMethod.GET)
     public ResponseEntity<List<eventos>> obtenerEventos() {
-        List<eventos> situaciones = Situaciones_Servicio.getSituaciones();
+        List<eventos> situaciones = eventoServicio.getSituaciones();
         return new ResponseEntity<List<eventos>>(situaciones, HttpStatus.OK);
     }
 
 
-    @RequestMapping(value = "/personasBuscar", method = RequestMethod.GET)
+    @RequestMapping(value = "/personaBuscar", method = RequestMethod.GET)
     public ResponseEntity<List<personas>> PersonaID(@RequestParam(value = "IdCiudadano") int IdCiudadano) {
-        List<personas> ciudadnosId = (List<personas>) Ciudadano_Servicio.getCiudadanoPorId(IdCiudadano);
+        List<personas> ciudadnosId = (List<personas>) personaServicio.getCiudadanoPorId(IdCiudadano);
         return new ResponseEntity<List<personas>>(ciudadnosId, HttpStatus.OK);
     }
+    
+    /* @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public ResponseEntity<List<personas>> login(@RequestParam(value = "usuario") String usuario) {
+    List<personas> personasID = (List<personas>) personaServicio.getLogin(usuario);
+    return new ResponseEntity<List<personas>>(personasID, HttpStatus.OK);
+    }*/
 
-    @RequestMapping(value = "/EventosInsert", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/EventosInsertar", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> crearEventoPersona(@RequestBody historia registroEvento) {
-        String resultado = "Se creo el evento : " + registroSituacionesServicio.registroEvento(registroEvento);
+        String resultado = "Se creo el evento : " + historiaServicio.registroEvento(registroEvento);
         return new ResponseEntity<>(resultado, HttpStatus.OK);
     }
     
 
-    
+    //Revisar
     @RequestMapping(value = "/eventos_persona", method = RequestMethod.GET)
     public ResponseEntity<List<historia>> eventosCiudadanoPorId(@RequestParam(value = "IdCiudadano") int id) {
-        List<historia> eventosCiudadanosId = (List<historia>) registroSituacionesServicio.getEventosId(id); 
-                
+        List<historia> eventosCiudadanosId = (List<historia>) historiaServicio.getEventosId(id);                 
         return new ResponseEntity<>(eventosCiudadanosId, HttpStatus.OK);
-    }
-    
-    
+    }        
 }

@@ -34,11 +34,19 @@ public class personaRepositorio {
         return Persona.getIdCiudadano();
     }
 
-    public List<personas> ciudadnosPorId(int IdCiudadano) {
+    public List<personas> personaPorID(int IdCiudadano) {
         Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(personas.class);
         criteria.add(Restrictions.eq("IdCiudadano", IdCiudadano));
         return criteria.list();
-    
+
+    }
+
+    public List<personas> personaPorID(String usuario, String contraseña) {
+        Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(personas.class);
+        criteria.add(Restrictions.eq("USUARIO", usuario));
+        criteria.add(Restrictions.eq("CONTRASENNA", contraseña));
+        return criteria.list();
+
     }
 
 }
